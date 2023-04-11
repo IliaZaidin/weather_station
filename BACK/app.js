@@ -6,7 +6,7 @@ const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const readingRouter = require('./routes/readings');
+const indexRouter = require('./routes/readings');
 const NotFoundError = require('./middlewares/notFoundError');
 const { createUser, login } = require('./controllers/users');
 const { authorize } = require('./middlewares/auth');
@@ -57,7 +57,7 @@ app.post(
   createUser,
 );
 
-app.use('/', authorize, readingRouter);
+app.use('/', authorize, indexRouter);
 app.get('*', () => {
   throw new NotFoundError('Requested resource not found');
 });
