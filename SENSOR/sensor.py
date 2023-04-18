@@ -30,8 +30,8 @@ while True:
 	format_press = "{:.2f}".format(pressure)
 
 	dictionary = { "temperature": format_temp, "pressure": format_press, "date": currentDate, "time": currentTime }
-	lastReading = collection.insert_one(dictionary)\
-    
-	print(collection.find_one(lastReading.inserted_id))
+	lastReading = collection.insert_one(dictionary)
 
-	time.sleep(4)
+#	print(collection.find_one(lastReading.inserted_id))
+
+	time.sleep(3600)

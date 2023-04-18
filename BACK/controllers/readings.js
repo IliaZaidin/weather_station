@@ -5,7 +5,8 @@ const Unauthorized = require('../middlewares/unauthorizedError');
 
 const getReadings = async (req, res, next) => {
   try {
-    const readings = await Reading.find({ owner: req.user._id });
+    // const readings = await Reading.find({ owner: req.user._id });
+    const readings = await Reading.find();
     if (readings.length === 0) {
       throw new NotFoundError('No readings found on server');
     } else res.send(readings);

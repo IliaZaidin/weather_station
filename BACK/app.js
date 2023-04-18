@@ -6,7 +6,7 @@ const cors = require('cors');
 const { celebrate, Joi, errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-const indexRouter = require('./routes/readings');
+const indexRouter = require('./routes');
 const NotFoundError = require('./middlewares/notFoundError');
 const { createUser, login } = require('./controllers/users');
 const { authorize } = require('./middlewares/auth');
