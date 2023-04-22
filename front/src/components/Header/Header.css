@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-image: url('../../images/background.png');
+  background-repeat: no-repeat; */
+  background-size: cover;
+}
+
+.header__title {
+  margin: 30px auto 26px 104px;
+  padding: 0;
+  font-family: serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #000000;
+}
