@@ -5,7 +5,6 @@ const Unauthorized = require('../middlewares/unauthorizedError');
 
 const getReadings = async (req, res, next) => {
   try {
-    // const readings = await Reading.find({ owner: req.user._id });
     const readings = await Reading.find();
     if (readings.length === 0) {
       throw new NotFoundError('No readings found on server');
@@ -17,11 +16,9 @@ const getReadings = async (req, res, next) => {
 
 const deleteReading = async (req, res, next) => {
   try {
-    const reading = await Reading.findById(req.params.readingId).select('+owner');
+    const reading = await Reading.findById(req.params.readingId);
     if (!reading) {
       throw new NotFoundError('Reading ID not found');
-    } else if (req.user._id !== reading.owner.toString()) {
-      throw new Unauthorized('Authorization required');
     } else {
       await Reading.findByIdAndRemove(reading._id.toString());
       res.status(200).send(reading);

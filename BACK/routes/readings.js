@@ -3,9 +3,7 @@ const { celebrate, Joi } = require('celebrate');
 const validateURL = require('../utils/validateURL');
 
 const readingRouter = express.Router();
-const {
-  getReadings, deleteReading, 
-} = require('../controllers/readings');
+const { getReadings, deleteReading } = require('../controllers/readings');
 
 readingRouter.get(
   '/',

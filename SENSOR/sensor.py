@@ -20,18 +20,16 @@ db = client['weatherdb']
 collection = db["readings"]
 
 while True:
-	temperature = bmp280.get_temperature()
-	pressure = bmp280.get_pressure()
 	timeStamp = time.localtime()
 
-	currentTime = time.strftime("%H:%M:%S", timeStamp)
-	currentDate = time.strftime("%d/%m/%y", timeStamp)
-	format_temp = "{:.2f}".format(temperature)
-	format_press = "{:.2f}".format(pressure)
+	if timeStamp.tm_min == 0:
+		temperature = bmp280.get_temperature()
+		pressure = bmp280.get_pressure()
+		currentTime = time.strftime("%H:%M:%S", timeStamp)
+		currentDate = time.strftime("%d/%m/%y", timeStamp)
+		format_temp = "{:.2f}".format(temperature)
+		format_press = "{:.2f}".format(pressure)
+		dictionary = { "temperature": format_temp, "pressure": format_press, "date": currentDate, "time": currentTime }
+		lastReading = collection.insert_one(dictionary)
 
-	dictionary = { "temperature": format_temp, "pressure": format_press, "date": currentDate, "time": currentTime }
-	lastReading = collection.insert_one(dictionary)
-
-#	print(collection.find_one(lastReading.inserted_id))
-
-	time.sleep(3600)
+	time.sleep(60)
