@@ -1,5 +1,5 @@
-// import { baseUrl } from "./consts";
-const baseUrl = "http://localhost:3000";
+import { baseUrl } from "./consts";
+// const baseUrl = "http://localhost:3000";
 
 function checkResponse(res) {
   if (res.ok) {
