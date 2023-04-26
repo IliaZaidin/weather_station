@@ -1,6 +1,5 @@
 const express = require('express');
 const { celebrate, Joi } = require('celebrate');
-const validateURL = require('../utils/validateURL');
 
 const readingRouter = express.Router();
 const { getReadings, deleteReading } = require('../controllers/readings');
@@ -23,6 +22,5 @@ readingRouter.delete(
   }),
   deleteReading,
 );
-
 
 module.exports = readingRouter;

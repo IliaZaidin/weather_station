@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 const Reading = require('../models/readings');
 const NotFoundError = require('../middlewares/notFoundError');
-const Unauthorized = require('../middlewares/unauthorizedError');
 
 const getReadings = async (req, res, next) => {
   try {
