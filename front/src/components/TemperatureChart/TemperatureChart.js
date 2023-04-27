@@ -1,20 +1,28 @@
-import {Chart as ChartJS, LinearScale} from 'chart.js/auto'
+import { Chart as ChartJS, LinearScale } from 'chart.js/auto'
 import { Line } from "react-chartjs-2";
-import { ReadingsData } from "../../utils/ReadingsData"; //need to pass as props or Redux
 
 
 function TemperatureChart(props) {
 
-  const temperatureData = { }
-  //     labels: props.map((data) => data.time),
-  //     datasets: [{
-  //       label: "Temperature",
-  //       data: props.map((data) => data.temperature)
-  //     }]
-  // };
+  const { readings } = props;
+
+  const temperatureData = {
+    labels: readings.map((data) => data.time.substr(0,5)),
+    datasets: [{
+      label: "Temperature",
+      data: readings.map((data) => data.temperature),
+      fill: true,
+      tension: 0.5,
+      backgroundColor: [
+        'rgba(36, 85, 199, 0.5'
+      ]
+    }]
+  };
 
   return (
-    <Line data={temperatureData} />
+    <div className='temp-chart'>
+      <Line data={temperatureData} />
+    </div>
   )
 }
 

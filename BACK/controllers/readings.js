@@ -4,7 +4,7 @@ const NotFoundError = require('../middlewares/notFoundError');
 
 const getReadings = async (req, res, next) => {
   try {
-    const readings = await Reading.find();
+    const readings = await Reading.find({}).limit(24);
     if (readings.length === 0) {
       throw new NotFoundError('No readings found on server');
     } else res.send(readings);

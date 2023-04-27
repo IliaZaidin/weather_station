@@ -1,20 +1,27 @@
 import { Chart as ChartJS, LinearScale } from 'chart.js/auto'
 import { Line } from "react-chartjs-2";
-import { ReadingsData } from "../../utils/ReadingsData"; //need to pass as props or Redux
-
 
 function PressureChart(props) {
 
-  const pressureData = {}
-  //   labels: props.map((data) => data.time),
-  //   datasets: [{
-  //     label: "Pressure",
-  //     data: props.map((data) => data.pressure)
-  //   }]
-  // };
+  const { readings } = props;
+
+  const pressureData = {
+    labels: readings.map((data) => data.time.substr(0,5)),
+    datasets: [{
+      label: "Atmospheric Pressure",
+      data: readings.map((data) => data.pressure),
+      fill: true,
+      tension: 0.5,
+      backgroundColor: [
+        'rgba(36, 85, 199, 0.5)'
+      ]
+    }],
+  };
 
   return (
-    <Line data={pressureData} />
+    <div className='pressure-chart'>
+      <Line data={pressureData} />
+    </div>
   )
 }
 

@@ -20,13 +20,13 @@ db = client['weatherdb']
 collection = db["readings"]
 
 while True:
-	timeStamp = time.localtime()
+  timeStamp = time.localtime()
 
-	if timeStamp.tm_min == 0:
-		temperature = bmp280.get_temperature()
-		pressure = bmp280.get_pressure()
+  if timeStamp.tm_min == 0:
+	  temperature = bmp280.get_temperature()
+    pressure = bmp280.get_pressure()
 
-		currentTime = time.strftime("%H:%M:%S", timeStamp)
+    currentTime = time.strftime("%H:%M:%S", timeStamp)
 		currentDate = time.strftime("%d/%m/%y", timeStamp)
 
 		format_temp = "{:.2f}".format(temperature)

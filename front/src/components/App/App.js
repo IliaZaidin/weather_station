@@ -10,29 +10,31 @@ import { getReadingsFromDb } from '../../utils/api';
 
 function App() {
 
-  const [readings, setReadings] = useState([{}]);
   const [isModalOpen, setModalOpen] = useState(false);
+  const [readings, setReadings] = useState([]);
 
   useEffect(() => {
     (async () => {
       try {
         const readingsFromDb = await getReadingsFromDb();
-        console.log(readingsFromDb)
         if (readingsFromDb) {
           setReadings(readingsFromDb);
-          console.log(readings);
         }
-      } catch {
-        console.log('ERROR: failed to get data from DB')
+      }
+      catch {
+        console.log('ERROR: failed to get data from DB');
         return;
       }
-    })();
+    }
+    )();
   }, []);
 
   return (
     <div className="App">
       <Header
-        element={<Header />}
+        element={<Header
+          readings={"readings"}
+        />}
       />
       <Routes>
         <Route
