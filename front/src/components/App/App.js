@@ -6,12 +6,12 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 
-import { getReadingsFromDb } from '../../utils/api';
+import { getReadingsFromDb, getForecast } from '../../utils/api';
 
 function App() {
 
-  const [isModalOpen, setModalOpen] = useState(false);
   const [readings, setReadings] = useState([]);
+  const [forecast, setForecast] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -20,9 +20,13 @@ function App() {
         if (readingsFromDb) {
           setReadings(readingsFromDb);
         }
+        const forecastFromBe = await getForecast();
+        if (forecastFromBe) {
+          setForecast(forecastFromBe);
+        }
       }
       catch {
-        console.log('ERROR: failed to get data from DB');
+        console.log('ERROR in useEffect');
         return;
       }
     }
@@ -32,9 +36,7 @@ function App() {
   return (
     <div className="App">
       <Header
-        element={<Header
-          readings={"readings"}
-        />}
+        forecast={forecast}
       />
       <Routes>
         <Route

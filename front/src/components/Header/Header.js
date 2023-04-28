@@ -1,13 +1,12 @@
 import './Header.css';
 
 function Header(props) {
-  const { readings } = props;
-  // const currentDate = readings[readings.length-1].date.substr(0,5);
+  const { forecast } = props;
 
   return (
     <header className='header'>
       <h1 className='header__title'>Weather Station</h1>
-      {/* <h2>Today is {currentDate}</h2> */}
+      <h2 className='header__forecast'>{`Zambretti Forecast: ${forecast}`}</h2>
     </header>
   )
 }

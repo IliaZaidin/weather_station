@@ -23,16 +23,16 @@ while True:
   timeStamp = time.localtime()
 
   if timeStamp.tm_min == 0:
-	  temperature = bmp280.get_temperature()
+    temperature = bmp280.get_temperature()
     pressure = bmp280.get_pressure()
 
     currentTime = time.strftime("%H:%M:%S", timeStamp)
-		currentDate = time.strftime("%d/%m/%y", timeStamp)
+    currentDate = time.strftime("%d/%m/%y", timeStamp)
 
-		format_temp = "{:.2f}".format(temperature)
-		format_press = "{:.2f}".format(pressure)
-    
-		dictionary = { "temperature": format_temp, "pressure": format_press, "date": currentDate, "time": currentTime }
-		lastReading = collection.insert_one(dictionary)
+    format_temp = "{:.2f}".format(temperature)
+    format_press = "{:.2f}".format(pressure)
 
-	time.sleep(60)
+    dictionary = { "temperature": format_temp, "pressure": format_press, "date": currentDate, "time": currentTime }
+    lastReading = collection.insert_one(dictionary)
+
+  time.sleep(60)

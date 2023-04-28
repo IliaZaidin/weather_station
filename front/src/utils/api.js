@@ -1,5 +1,5 @@
-import { baseUrl } from "./consts";
-// const baseUrl = "http://localhost:3000";
+// import { baseUrl } from "./consts";
+const baseUrl = "http://localhost:3000";
 
 function checkResponse(res) {
   if (res.ok) {
@@ -21,4 +21,15 @@ const getReadingsFromDb = async () => {
   return checkResponse(res);
 }
 
-export { getReadingsFromDb };
+const getForecast = async () => {
+  const res = await fetch(
+    `${baseUrl}/forecast`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+    }
+  });
+  return checkResponse(res);
+}
+
+export { getReadingsFromDb, getForecast };
