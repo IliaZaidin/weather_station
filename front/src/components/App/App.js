@@ -15,13 +15,12 @@ function App() {
   const [forecast, setForecast] = useState('');
 
   useEffect(() => {
-    const dataToggle = !pollingState;
-
     pollDataAtServer();
 
     setTimeout(() => {
-      setPollingState(dataToggle);
-    }, 1800*1000)
+      setPollingState(!pollingState);
+    }, 1000*1800)
+
   }, [pollingState]);
 
   function pollDataAtServer() {

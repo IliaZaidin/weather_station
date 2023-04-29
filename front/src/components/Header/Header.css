@@ -16,13 +16,30 @@
 }
 
 .header__title {
-  margin: 30px auto 26px 104px;
+  margin: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.header__title_name {
+  margin: 0;
   padding: 0;
   font-size: 40px;
+  line-height: 24px;
+  text-align: end;
+}
+
+.header__title_date {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
   line-height: 24px;
 }
 
 .header__subtitle {
+  margin: 0;
   padding: 0;
   font-size: 30px;
   line-height: 24px;
@@ -35,6 +52,7 @@
 }
 
 .header__forecast {
+  margin: 20px;
   padding: 0;
   font-size: 30px;
   line-height: 24px;
