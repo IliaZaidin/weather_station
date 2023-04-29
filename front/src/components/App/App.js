@@ -10,10 +10,21 @@ import { getReadingsFromDb, getForecast } from '../../utils/api';
 
 function App() {
 
+  const [pollingState, setPollingState] = useState(false);
   const [readings, setReadings] = useState([]);
   const [forecast, setForecast] = useState('');
 
   useEffect(() => {
+    const dataToggle = !pollingState;
+
+    pollDataAtServer();
+
+    setTimeout(() => {
+      setPollingState(dataToggle);
+    }, 1800*1000)
+  }, [pollingState]);
+
+  function pollDataAtServer() {
     (async () => {
       try {
         const readingsFromDb = await getReadingsFromDb();
@@ -31,7 +42,7 @@ function App() {
       }
     }
     )();
-  }, []);
+  };
 
   return (
     <div className="App">
