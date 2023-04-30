@@ -13,13 +13,15 @@ function App() {
   const [pollingState, setPollingState] = useState(false);
   const [readings, setReadings] = useState([]);
   const [forecast, setForecast] = useState('');
+  const [currentDate, setCurrentDate] = useState(new Date());
 
   useEffect(() => {
     pollDataAtServer();
-
+    setCurrentDate(new Date());
+    
     setTimeout(() => {
       setPollingState(!pollingState);
-    }, 1000*1800)
+    }, 1000*3600)
 
   }, [pollingState]);
 
@@ -47,6 +49,7 @@ function App() {
     <div className="App">
       <Header
         forecast={forecast}
+        currentDate={currentDate}
       />
       <Routes>
         <Route

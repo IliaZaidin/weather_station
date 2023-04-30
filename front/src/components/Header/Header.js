@@ -1,10 +1,9 @@
 import './Header.css';
 
 function Header(props) {
-  const { forecast } = props;
+  const { forecast, currentDate } = props;
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  const date = new Date();
-  const dateToPresent = `Last updated on ${months[date.getMonth()]} ${date.getDate()}, ${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
+  const dateToPresent = `Last updated on ${months[currentDate.getMonth()]} ${currentDate.getDate()}, ${currentDate.getHours() < 10 ? '0' + currentDate.getHours() : currentDate.getHours()}:${currentDate.getMinutes() < 10 ? '0' + currentDate.getMinutes() : currentDate.getMinutes()}`
 
   return (
     <header className='header'>
