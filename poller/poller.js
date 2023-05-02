@@ -49,4 +49,4 @@ setInterval(() => {
   } catch (error) {
     console.log("Polling process exited with error: \n", error);
   }
-}, 1000 * 20)
+}, 1000 * 3600)
