@@ -1,6 +1,5 @@
 const Reading = require('../models/readings');
 const NotFoundError = require('../middlewares/notFoundError');
-const { log } = require('winston');
 
 const lookupTable = new Map([
   [1, "Settled Fine"],
