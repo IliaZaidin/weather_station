@@ -9,8 +9,7 @@ const Reading = require('./models/readings');
 
 require('dotenv').config();
 
-const { DB_ADDRESS, SENSOR_ADDRESS } = process.env;
-const { PORT } = process.env;
+const { DB_ADDRESS, SENSOR_ADDRESS, PORT } = process.env;
 const app = express();
 
 mongoose.connect(DB_ADDRESS);
