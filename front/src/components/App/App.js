@@ -18,13 +18,8 @@ function App() {
   useEffect(() => {
     pollDataAtServer();
     setCurrentDate(new Date());
-    
-    setTimeout(() => {
-      setPollingState(!pollingState);
-    }, 1000 * 3600)
-
   }, [pollingState]);
-
+  
   function pollDataAtServer() {
     (async () => {
       try {
@@ -44,6 +39,13 @@ function App() {
     }
     )();
   };
+  
+  setInterval(() => {
+    const time = new Date()
+    if (time.getMinutes() == 1) {
+      setPollingState(!pollingState);
+    }
+  }, 1000 * 60)
 
   return (
     <div className="App">
