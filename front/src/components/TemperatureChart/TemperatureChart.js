@@ -1,6 +1,7 @@
 import { Chart as ChartJS, LinearScale } from 'chart.js/auto'
 import { Line } from "react-chartjs-2";
 
+
 function TemperatureChart(props) {
 
   const { readings } = props;
@@ -8,8 +9,9 @@ function TemperatureChart(props) {
   const temperatureData = {
     labels: readings.map((data) => {
       const time = new Date(data.timestamp);
-      return time.getHours() + ':' + time.getMinutes();
-    }),
+      return time.getHours().toString().padStart(2, '0') + ':' + time.getMinutes().toString().padStart(2, '0');
+    }
+    ),
     datasets: [{
       label: "Temperature",
       data: readings.map((data) => data.temperature),
