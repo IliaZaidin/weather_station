@@ -35,10 +35,12 @@ setInterval(() => {
       });
 
       response.on('end', async () => {
-        await Reading.create(data);
+        const time = new Date(data.timestamp)
+        if (time.getMinutes() == 0)
+          await Reading.create(data);
       });
     });
   } catch (error) {
     console.log("Polling process exited with error: \n", error);
   }
-}, 1000 * 4)
+}, 1000 * 60)
