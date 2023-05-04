@@ -6,7 +6,10 @@ function PressureChart(props) {
   const { readings } = props;
 
   const pressureData = {
-    labels: readings.map((data) => data.time.substr(0,5)),
+    labels: readings.map((data) => {
+      const time = new Date(data.timestamp);
+      return time.getHours() + ':' + time.getMinutes();
+    }),
     datasets: [{
       label: "Atmospheric Pressure",
       data: readings.map((data) => data.pressure),

@@ -4,6 +4,7 @@ import { baseUrl } from "./consts";
 function checkResponse(res) {
   if (res.ok) {
     const data = res.json();
+    // console.log(data);
     return data;
   } else {
     return Promise.reject(res);

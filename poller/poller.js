@@ -35,17 +35,10 @@ setInterval(() => {
       });
 
       response.on('end', async () => {
-        const date = new Date(data.timestamp);
-        const newReading = {
-          "temperature": data.temperature,
-          "pressure": data.pressure,
-          "date": `${date.getDate().toString().padStart(2, '0')}/${date.getMonth().toString().padStart(2, '0')}/${date.getFullYear().toString().slice(-2)}`,
-          "time": `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`,
-        }
-        await Reading.create(newReading);
+        await Reading.create(data);
       });
     });
   } catch (error) {
     console.log("Polling process exited with error: \n", error);
   }
-}, 1000 * 3600)
+}, 1000 * 4)

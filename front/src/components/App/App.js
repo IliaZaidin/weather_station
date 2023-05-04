@@ -21,7 +21,7 @@ function App() {
     
     setTimeout(() => {
       setPollingState(!pollingState);
-    }, 1000*3600)
+    }, 1000 * 3600)
 
   }, [pollingState]);
 

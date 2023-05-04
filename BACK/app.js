@@ -41,7 +41,7 @@ app.use(errorLogger);
 app.use(errors());
 app.use(handleErrors);
 
-//node app.js to run manually 
+// To run manually: node app.js
 app.listen(PORT, () => {
   console.log(`\u001b[1;33m\n********************************\nApp is listening at port ${PORT}\u001b[0m`);
 });
