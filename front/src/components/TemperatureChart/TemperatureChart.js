@@ -7,7 +7,7 @@ function TemperatureChart(props) {
 
   const temperatureData = {
     labels: readings.map((data) => {
-      const time = new Date(data.timestamp);
+      const time = new Date(data.timestamp.slice(0, -5));
       return time.getHours().toString().padStart(2, '0') + ':' + time.getMinutes().toString().padStart(2, '0');
     }),
     datasets: [{

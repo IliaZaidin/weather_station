@@ -6,6 +6,7 @@ const http = require('http');
 
 const limiter = require('./utils/rateLimiter');
 const Reading = require('./models/readings');
+const indexRouter = require('./routes');
 
 require('dotenv').config();
 
@@ -19,6 +20,8 @@ app.use(helmet());
 app.use(limiter);
 app.use(cors());
 app.options('*', cors());
+
+app.use('/', indexRouter);
 
 //To run manually: node poller.js  
 app.listen(PORT, () => {
@@ -45,3 +48,5 @@ setInterval(() => {
     console.log("Polling process exited with error: \n", error);
   }
 }, 1000 * 60)
+
+
