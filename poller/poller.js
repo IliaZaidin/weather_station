@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
-const https = require('https');
+const http = require('http');
 
 const limiter = require('./utils/rateLimiter');
 const Reading = require('./models/readings');
@@ -27,19 +27,20 @@ app.listen(PORT, () => {
 
 setInterval(() => {
   try {
-    https.get(SENSOR_ADDRESS, response => {
-      let data = {};
+    const time = new Date()
+    if (time.getMinutes() == 0) {
+      http.get(SENSOR_ADDRESS, response => {
+        let data = {};
 
-      response.on('data', res => {
-        data = JSON.parse(res);
-      });
+        response.on('data', res => {
+          data = JSON.parse(res);
+        });
 
-      response.on('end', async () => {
-        const time = new Date(data.timestamp)
-        if (time.getMinutes() == 0)
+        response.on('end', async () => {
           await Reading.create(data);
+        });
       });
-    });
+    }
   } catch (error) {
     console.log("Polling process exited with error: \n", error);
   }
