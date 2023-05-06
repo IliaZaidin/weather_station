@@ -1,22 +1,13 @@
 /* eslint-disable no-console */
-const http = require('http');
 const Reading = require('../models/readings');
 const NotFoundError = require('../middlewares/notFoundError');
-const { SENSOR_ADDRESS } = process.env;
+const pollSensor = require('../utils/pollSensor');
 
 const createReading = (req, res, next) => {
     try {
-        http.get(SENSOR_ADDRESS, response => {
-            let reading = {};
-            response.on('data', data => {
-                reading = JSON.parse(data);
-            });
-
-            response.on('end', async () => {
-                await Reading.create(reading);
-                res.status(200).send(reading)
-            });
-        });
+        let reading = pollSensor();
+        Reading.create(reading);
+        res.status(200).send(reading)
     } catch (error) {
         next(error);
     }

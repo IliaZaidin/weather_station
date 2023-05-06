@@ -52,7 +52,7 @@ setInterval(() => {
         const time = new Date()
         // if (time.getMinutes() == 0) {
         if (time.getSeconds() == 0) {
-            createReading();
+            createReading(req, res, next);
         }
     } catch (error) {
         console.log('Polling sequence exited with error: ', error);
