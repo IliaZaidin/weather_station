@@ -10,7 +10,6 @@ const indexRouter = require('./routes');
 const NotFoundError = require('./middlewares/notFoundError');
 const limiter = require('./utils/rateLimiter');
 const handleErrors = require('./middlewares/handleErrors');
-const createReading = require('./controllers/readings')
 
 require('dotenv').config();
 
@@ -46,16 +45,3 @@ app.use(handleErrors);
 app.listen(PORT, () => {
     console.log(`\u001b[1;33m\n********************************\nApp is listening at port ${PORT}\u001b[0m`);
 });
-
-setInterval(() => {
-    try {
-        const time = new Date()
-        // if (time.getMinutes() == 0) {
-        if (time.getSeconds() == 0) {
-            createReading(req, res, next);
-        }
-    } catch (error) {
-        console.log('Polling sequence exited with error: ', error);
-    }
-// }, 1000 * 60)
-}, 1000)

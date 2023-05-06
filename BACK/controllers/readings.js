@@ -3,10 +3,10 @@ const Reading = require('../models/readings');
 const NotFoundError = require('../middlewares/notFoundError');
 const pollSensor = require('../utils/pollSensor');
 
-const createReading = (req, res, next) => {
+const createReading = async (req, res, next) => {
     try {
-        let reading = pollSensor();
-        Reading.create(reading);
+        let sensorData = req.body;
+        const reading = await Reading.create(sensorData);
         res.status(200).send(reading)
     } catch (error) {
         next(error);

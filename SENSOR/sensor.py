@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import datetime
+import datetime, time, schedule, requests
 from bmp280 import BMP280
 from flask import Flask
 
@@ -14,7 +14,7 @@ bmp280 = BMP280(i2c_dev=bus)
 degree_sign = u"\N{DEGREE SIGN}"
 
 app = Flask(__name__)
-@app.route('/poll', methods=['GET'])  # accessible at port 5000
+
 def getReading():
     try:
         temperature = bmp280.get_temperature()
@@ -26,9 +26,22 @@ def getReading():
 
         reading = {"temperature": format_temp, "pressure": format_press, "timestamp": timeStamp}
         return reading
-      
     except Exception:
         print("Error connecting to the sensor:")
         
+def postReading():
+    url = 'https://api.weatherstation.zaidin.online/readings'
+    reading = getReading()
+    requests.post(url, data=reading)
+
+@app.route('/poll', methods=['GET'])  # accessible at port 5000
+def index():
+    return getReading()
+
 if __name__ == '__main__':
     app.run(debug=True)
+
+schedule.every(60).minutes.do(postReading)
+while True:
+    schedule.run_pending()
+    time.sleep(60)
