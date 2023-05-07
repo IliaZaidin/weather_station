@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 const Reading = require('../models/readings');
 const NotFoundError = require('../middlewares/notFoundError');
-const pollSensor = require('../utils/pollSensor');
 
 const createReading = async (req, res, next) => {
     try {

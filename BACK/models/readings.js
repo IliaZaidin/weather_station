@@ -12,7 +12,7 @@ const readingSchema = new mongoose.Schema(
       required: true,
     },
     timestamp: {
-        type: Date,
+        type: String,
         required: true,
       }
   },
