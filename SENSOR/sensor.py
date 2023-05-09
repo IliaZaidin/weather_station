@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import datetime, time, requests, threading
 from bmp280 import BMP280
-from flask import Flask
+from flask import Flask, jsonify
 
 try:
     from smbus2 import SMBus
@@ -22,33 +22,32 @@ def getReading():
         reading = {"temperature": format_temp, "pressure": format_press, "timestamp": timeStamp.strftime("%Y-%m-%d %H:%M:%S")}
         return reading
     except Exception:
-        print("Failed polling the sensor.")
+        print("\nFailed polling the sensor.")
         
-def postReading():
-    try:
-        url = 'https://api.weatherstation.zaidin.online/readings'
-        # url = 'http://localhost:3000/readings'
-        reading = getReading()
-        response = requests.post(url, json = reading)
-        response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        print("Failed to post reading. ", e)
-    
 def loopPolling():
     while True:
         now = datetime.datetime.now()
-        minutes = now.minute
+        # minutes = now.minute
+        minutes = now.second
         if minutes == 0:
-            postReading()
-        time.sleep(60)
-    
-app = Flask(__name__)
+            try:
+                url = 'https://api.weatherstation.zaidin.online/readings'
+                # url = 'http://localhost:3000/readings'
+                reading = getReading()
+                response = requests.post(url, json = reading)
+                response.raise_for_status()
+            except requests.exceptions.RequestException as e:
+                print("\nFailed to post reading. ", e)
+        time.sleep(1)
 
+loopPollingThread = threading.Thread(target=loopPolling)
+loopPollingThread.start()
+
+app = Flask(__name__)
 @app.route('/poll', methods=['GET'])  # accessible at port 5000
-def index():
-    return getReading()
+def pollHandler():
+    response = jsonify(getReading())
+    return response
 
 if __name__ == '__main__':
-    task_thread = threading.Thread(target=loopPolling)
-    task_thread.start()
-    app.run(debug=True)
+    app.run(threaded=True)
