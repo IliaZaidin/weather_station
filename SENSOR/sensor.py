@@ -27,8 +27,7 @@ def getReading():
 def loopPolling():
     while True:
         now = datetime.datetime.now()
-        # minutes = now.minute
-        minutes = now.second
+        minutes = now.minute
         if minutes == 0:
             try:
                 url = 'https://api.weatherstation.zaidin.online/readings'
@@ -38,7 +37,7 @@ def loopPolling():
                 response.raise_for_status()
             except requests.exceptions.RequestException as e:
                 print("\nFailed to post reading. ", e)
-        time.sleep(1)
+        time.sleep(60)
 
 loopPollingThread = threading.Thread(target=loopPolling)
 loopPollingThread.start()
