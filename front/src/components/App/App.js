@@ -7,6 +7,7 @@ import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 
 import { getReadingsFromDb, getForecast } from '../../utils/api';
+import { lookupTable } from '../../utils/consts';
 
 function App() {
 
@@ -27,9 +28,9 @@ function App() {
         if (readingsFromDb) {
           setReadings(readingsFromDb);
         }
-        const forecastFromBe = await getForecast();
-        if (forecastFromBe) {
-          setForecast(forecastFromBe);
+        const forecastCode = await getForecast();
+        if (forecastCode) {
+            setForecast(lookupTable.get(forecastCode));
         }
       }
       catch {
