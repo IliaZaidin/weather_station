@@ -35,7 +35,7 @@ const getForecast = async (req, res, next) => {
       else {
         Z = Math.round(144 - 0.13 * forecastData[1]);
       }
-    res.send(Z);
+      res.status(200).send(JSON.stringify(Z));
     }
   } catch (error) {
     next(error);

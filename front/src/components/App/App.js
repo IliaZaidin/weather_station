@@ -43,7 +43,7 @@ function App() {
   
   setInterval(() => {
     const time = new Date()
-    if (time.getMinutes() == 1) {
+    if (time.getMinutes() === 1) {
       setPollingState(!pollingState);
     }
   }, 1000 * 60)
