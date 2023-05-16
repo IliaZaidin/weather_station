@@ -6,7 +6,7 @@ function calculateSeaLevelPressure(data) {
   let output = [];
 
   //PressureAtSeaLevel = pressure * pow(1 - (0.0065 * elevationM) / (tempC + (0.0065 * elevationM) + 273.15), -5.257 ))
-  output[0] = parseFloat(data[data.length-9].pressure) * Math.pow(1 - (0.0065 * elevationM) / (parseFloat(data[data.length-9].temperature) + (0.0065 * elevationM) + 273.15), -5.257);
+  output[0] = parseFloat(data[data.length-5].pressure) * Math.pow(1 - (0.0065 * elevationM) / (parseFloat(data[data.length-5].temperature) + (0.0065 * elevationM) + 273.15), -5.257);
   output[1] = parseFloat(data[data.length-1].pressure) * Math.pow(1 - (0.0065 * elevationM) / (parseFloat(data[data.length-1].temperature) + (0.0065 * elevationM) + 273.15), -5.257);
 
   return output;

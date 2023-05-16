@@ -29,6 +29,7 @@ function App() {
           setReadings(readingsFromDb);
         }
         const forecastCode = await getForecast();
+        console.log(forecastCode);
         if (forecastCode) {
             setForecast(lookupTable.get(forecastCode));
         }
